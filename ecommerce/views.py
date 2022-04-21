@@ -1,0 +1,3 @@
+
+def HomePage(request):
+    pass
