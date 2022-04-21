@@ -1,3 +1,5 @@
+from django.shortcuts import render
+
 
 def HomePage(request):
-    pass
+    return render(request=request, template_name="home.html")
