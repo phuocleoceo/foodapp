@@ -33,7 +33,8 @@ class UserManager(BaseUserManager):
             username=username,
             email=self.normalize_email(email),
             first_name=first_name,
-            last_name=last_name
+            last_name=last_name,
+            password=password
         )
 
         user.is_admin = True
@@ -65,8 +66,27 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-    def has_permission(self, permission, obj=None):
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def has_perm(self, perm, obj=None):
         return self.is_admin
 
-    def has_module_permission(self, add_label):
+    def has_module_perms(self, add_label):
         return True
+
+
+# class UserProfile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     address_line_1 = models.CharField(blank=True, max_length=100)
+#     address_line_2 = models.CharField(blank=True, max_length=100)
+#     profile_picture = models.ImageField(blank=True, upload_to='userprofile')
+#     city = models.CharField(blank=True, max_length=50)
+#     state = models.CharField(blank=True, max_length=50)
+#     country = models.CharField(blank=True, max_length=50)
+
+#     def __str__(self):
+#         return self.user.last_name
+
+#     def full_address(self):
+#         return f'{self.address_line_1} {self.address_line_2}'
