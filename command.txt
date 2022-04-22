@@ -1,9 +1,16 @@
+### Collect static file
 python3 manage.py collectstatic  
 
 ### Migrate a table
-
 python3 manage.py startapp category
+
+ecommerce/settings.py -> INSTALLED_APPS -> category
 
 python3 manage.py makemigrations category
 
 python3 manage.py migrate
+
+### Create admin account
+python3 manage.py createsuperuser
+
+phuocleoceo / phuocars10
