@@ -10,7 +10,11 @@ python3 manage.py makemigrations category
 
 python3 manage.py migrate
 
+### Migrate all table 
+python3 manage.py makemigrations
+python3 manage.py migrate
+
 ### Create admin account
 python3 manage.py createsuperuser
 
-phuocleoceo / phuocars10
+phuocleoceo / ht10082001@gmail.com / phuocars10
