@@ -1,1 +1,9 @@
 python3 manage.py collectstatic  
+
+### Migrate a table
+
+python3 manage.py startapp category
+
+python3 manage.py makemigrations category
+
+python3 manage.py migrate
