@@ -1,3 +1,6 @@
+### Runserver
+python/python3 manage.py runserver 
+
 ### Collect static file
 python3 manage.py collectstatic  
 

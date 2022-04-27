@@ -128,6 +128,10 @@ STATIC_URL = 'static/'
 #     "ecommerce/static",
 # ]
 
+# Cấu hình đường dẫn Media file (ảnh,...)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR/'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
