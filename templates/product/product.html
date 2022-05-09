@@ -102,10 +102,15 @@
                                         <span class="price">{{ p.price }} VNĐ</span>
                                     </div>
                                 </div>
+
+                                {% if p.stock > 0 %}
                                 <a href="#" class="btn btn-block btn-primary">
                                     <i class="fas fa-cart-plus"></i>
                                     Thêm vào giỏ
                                 </a>
+                                {% else %}
+                                <h5 class="text-danger">Đã hết hàng</h5>
+                                {% endif %}
                             </figcaption>
                         </figure>
                     </div>

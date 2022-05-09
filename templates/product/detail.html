@@ -29,10 +29,14 @@
                         <p>{{ product.description }}</p>
 
                         <hr>
+                        {% if product.stock > 0 %}
                         <a href="#" class="btn  btn-primary">
                             <i class="fas fa-cart-plus"></i>
                             <span class="text">Thêm vào giỏ</span>
                         </a>
+                        {% else %}
+                        <h5 class="text-danger">Đã hết hàng</h5>
+                        {% endif %}
                     </article>
                 </main>
             </div>
