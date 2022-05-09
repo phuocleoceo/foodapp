@@ -14,6 +14,9 @@
                             <i class="fa fa-bars"></i> Tất cả danh mục
                         </button>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'product' %}">
+                                Tất cả sản phẩm
+                            </a>
                             {% for category in links %}
                             <a class="dropdown-item" href="{{ category.get_product }}">
                                 {{ category.name }}
@@ -23,7 +26,7 @@
                     </div>
                 </div>
 
-                <a href="/product" class="btn btn-outline-primary">Xem</a>
+                <!-- <a href="/product" class="btn btn-outline-primary">Xem</a> -->
 
                 <div class="col-lg  col-md-6 col-sm-12 col">
                     <form action="#" class="search">

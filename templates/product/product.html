@@ -20,6 +20,9 @@
                             <div class="card-body">
 
                                 <ul class="list-menu">
+                                    <li><a href="{% url 'product' %}">
+                                            <b>Tất cả sản phẩm</b>
+                                        </a></li>
                                     {% for c in categories %}
                                     <li><a href="{{ c.slug }}">{{ c.name }}</a></li>
                                     {% endfor %}
