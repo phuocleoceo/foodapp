@@ -22,4 +22,9 @@ def product(request, category_slug=None):
 
 
 def detail(request, product_slug):
-    return render(request=request, template_name="product/detail.html")
+    try:
+        product = Product.objects.get(slug=product_slug)
+    except Exception as e:
+        raise e
+    return render(request=request, template_name="product/detail.html",
+                  context={"product": product})
