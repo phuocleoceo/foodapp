@@ -19,3 +19,7 @@ def product(request, category_slug=None):
     categories = Category.objects.all()
     return render(request=request, template_name="product/product.html",
                   context={"products": products, "quantity": quantity, "categories": categories})
+
+
+def detail(request, product_slug):
+    return render(request=request, template_name="product/detail.html")

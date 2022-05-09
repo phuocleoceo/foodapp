@@ -83,19 +83,19 @@
                         <span class="mr-md-auto">Tìm thấy {{ quantity }} sản phẩm</span>
 
                     </div>
-                </header><!-- sect-heading -->
+                </header>
 
                 <div class="row">
                     {% for p in products %}
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
-                            <div class="img-wrap">
+                            <a href="./detail/{{ p.slug }}" class="img-wrap">
                                 <img src="{{ p.image.url }}">
-                            </div>
+                            </a>
 
                             <figcaption class="info-wrap">
                                 <div class="fix-height">
-                                    <a href="./product-detail" class="title">
+                                    <a href="./detail/{{ p.slug }}" class="title">
                                         {{ p.name }}
                                     </a>
                                     <div class="price-wrap mt-2">
