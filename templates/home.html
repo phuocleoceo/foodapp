@@ -25,12 +25,12 @@
             {% for p in products %}
             <div class="col-md-3">
                 <div class="card card-product-grid">
-                    <a href="./product-detail.html" class="img-wrap">
+                    <a href="./product-detail" class="img-wrap">
                         <img src="{{ p.image.url }}">
                     </a>
 
                     <figcaption class="info-wrap">
-                        <a href="./product-detail.html" class="title">{{ p.name }}</a>
+                        <a href="./product-detail" class="title">{{ p.name }}</a>
                         <div class="price mt-1">{{ p.price }} VNĐ</div> <!-- price-wrap.// -->
                     </figcaption>
                 </div>
