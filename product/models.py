@@ -1,4 +1,5 @@
 from category.models import Category
+from django.urls import reverse
 from django.db import models
 
 
@@ -28,3 +29,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_detail(self):
+        """
+        Hàm trả về vị trí trang Detail sản phẩm
+        """
+        return reverse("product_detail", args=[self.slug])

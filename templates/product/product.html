@@ -89,13 +89,13 @@
                     {% for p in products %}
                     <div class="col-md-4">
                         <figure class="card card-product-grid">
-                            <a href="./detail/{{ p.slug }}" class="img-wrap">
+                            <a href="{{ p.get_detail }}" class="img-wrap">
                                 <img src="{{ p.image.url }}">
                             </a>
 
                             <figcaption class="info-wrap">
                                 <div class="fix-height">
-                                    <a href="./detail/{{ p.slug }}" class="title">
+                                    <a href="{{ p.get_detail }}" class="title">
                                         {{ p.name }}
                                     </a>
                                     <div class="price-wrap mt-2">
