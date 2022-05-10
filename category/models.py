@@ -1,3 +1,4 @@
+from django.template.defaultfilters import slugify
 from django.urls import reverse
 from django.db import models
 
@@ -13,6 +14,14 @@ class Category(models.Model):
     class Meta:
         verbose_name = "category"
         verbose_name_plural = "categories"
+
+    def save(self, *args, **kwargs):
+        """
+        Slug có dấu thì URL sẽ bị lỗi không truy cập được 
+        Hàm slugify giúp ta chuyển â, ă -> a ,...
+        """
+        self.slug = slugify(self.slug)
+        super(Category, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
