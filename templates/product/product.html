@@ -104,7 +104,7 @@
                                 </div>
 
                                 {% if p.stock > 0 %}
-                                <a href="#" class="btn btn-block btn-primary">
+                                <a href="{% url 'add_to_cart' p.id %}" class="btn btn-block btn-primary">
                                     <i class="fas fa-cart-plus"></i>
                                     Thêm vào giỏ
                                 </a>
