@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect, render
 from cart.models import Cart, CartItem
 from product.models import Product
@@ -38,9 +39,25 @@ def add_to_cart(request, product_id):
     # Lưu cart_item
     cart_item.save()
 
-    # Redirect về trang Cart (thật ra là reload trang)
+    # Redirect đến trang Cart
     return redirect("cart")
 
 
 def cart(request):
-    return render(request=request, template_name="cart/cart.html")
+    total = 0
+    quantity = 0
+    cart_items = None
+    try:
+        # Dùng cart_id trong Session để lấy ra Cart
+        cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+        # Lấy ra các Card_Item chưa thanh tóan từ cart
+        cart_items = CartItem.objects.filter(cart=cart, is_active=True)
+        # Duyệt qua từng cart_item
+        for ct in cart_items:
+            # Tổng tiền = Đơn giá * số lượng
+            total += ct.product.price * ct.quantity
+            quantity += 1
+    except ObjectDoesNotExist:
+        pass
+    return render(request=request, template_name="cart/cart.html",
+                  context={"total": total, "quantity": quantity, "cart_items": cart_items})
