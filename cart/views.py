@@ -53,9 +53,9 @@ def cart(request):
         # Lấy ra các Card_Item chưa thanh tóan từ cart
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         # Duyệt qua từng cart_item
-        for ct in cart_items:
+        for ci in cart_items:
             # Tổng tiền = Đơn giá * số lượng
-            total += ct.product.price * ct.quantity
+            total += ci.product.price * ci.quantity
             quantity += 1
     except ObjectDoesNotExist:
         pass

@@ -23,5 +23,11 @@ class CartItem(models.Model):
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
 
+    def cart_total(self):
+        """
+        Hàm trả về Thành tiền của cart hiện tại
+        """
+        return self.product.price * self.quantity
+
     def __str__(self):
         return self.product
