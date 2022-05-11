@@ -80,16 +80,16 @@
                 <div class="card">
                     <div class="card-body">
                         <dl class="dlist-align">
-                            <dt>Tiền sản phẩm:</dt>
+                            <dt>Tiền sản phẩm :</dt>
                             <dd class="text-right">{{ total }}</dd>
                         </dl>
                         <dl class="dlist-align">
-                            <dt>Thuế:</dt>
-                            <dd class="text-right"> 15000</dd>
+                            <dt>Thuế (10% VAT) :</dt>
+                            <dd class="text-right">{{ tax }}</dd>
                         </dl>
                         <dl class="dlist-align">
-                            <dt>Tổng phải trả:</dt>
-                            <dd class="text-right text-dark b"><strong>165000</strong></dd>
+                            <dt>Tổng phải trả :</dt>
+                            <dd class="text-right text-dark b"><strong>{{ grand_total }}</strong></dd>
                         </dl>
                         <hr>
                         <!-- <p class="text-center mb-3">

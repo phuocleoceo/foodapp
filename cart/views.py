@@ -45,6 +45,8 @@ def add_to_cart(request, product_id):
 
 def cart(request):
     total = 0
+    tax = 10
+    grand_total = 0
     quantity = 0
     cart_items = None
     try:
@@ -56,8 +58,13 @@ def cart(request):
         for ci in cart_items:
             # Tổng tiền = Đơn giá * số lượng
             total += ci.product.price * ci.quantity
-            quantity += 1
+            quantity += ci.quantity
+        # Thuế 10% VAT
+        tax = round(total * tax/100)
+        # Tổng tiền cần trả
+        grand_total = total + tax
     except ObjectDoesNotExist:
         pass
     return render(request=request, template_name="cart/cart.html",
-                  context={"total": total, "quantity": quantity, "cart_items": cart_items})
+                  context={"total": total, "tax": tax, "grand_total": grand_total,
+                           "quantity": quantity, "cart_items": cart_items})
