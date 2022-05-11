@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="section-content padding-y">
+    <div class="card mx-auto" style="max-width:520px">
+        <article class="card-body">
+            <header class="mb-4">
+                <h4 class="card-title">Đăng ký</h4>
+            </header>
+            <form>
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label>Họ và tên đệm</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+
+                    <div class="col form-group">
+                        <label>Tên</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" placeholder="">
+                    <small class="form-text text-muted">Email của bạn sẽ được bảo vệ</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input" checked="" type="radio" name="gender" value="option1">
+                        <span class="custom-control-label"> Nam </span>
+                    </label>
+                    <label class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input" type="radio" name="gender" value="option2">
+                        <span class="custom-control-label"> Nữ </span>
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Thành phố</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>Quốc gia</label>
+                        <select id="inputState" class="form-control">
+                            <option> Choose...</option>
+                            <option>United States</option>
+                            <option>Russia</option>
+                            <option selected="">Việt Nam</option>
+                            <option>India</option>
+                            <option>Afganistan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Mật khẩu</label>
+                        <input class="form-control" type="password">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>Xác nhận mật khẩu</label>
+                        <input class="form-control" type="password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Đăng ký </button>
+                </div>
+            </form>
+        </article>
+    </div>
+    <p class="text-center mt-4">
+        Bạn đã có tài khoản ? <a href="/user/login">Đăng nhập luôn</a>
+    </p>
+    <br><br>
+</section>
+
+{% endblock content %}
