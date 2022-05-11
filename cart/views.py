@@ -1,5 +1,5 @@
+from django.shortcuts import get_object_or_404, redirect, render
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import redirect, render
 from cart.models import Cart, CartItem
 from product.models import Product
 
@@ -39,6 +39,27 @@ def add_to_cart(request, product_id):
     # Lưu cart_item
     cart_item.save()
 
+    # Redirect đến trang Cart
+    return redirect("cart")
+
+
+def remove_from_cart(request, product_id):
+    """
+    Hàm xóa 1 sản phẩm khỏi giỏ hàng
+    """
+    # Lấy ra cart với id lấy từ Session
+    cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+    # Lấy ra sản phẩm từ id
+    product = get_object_or_404(Product, id=product_id)
+    # Lấy ra cart_item
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    if cart_item.quantity > 1:
+        # Nếu số lượng >1 thì giảm 1
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        # Nếu không thì xóa luôn
+        cart_item.delete()
     # Redirect đến trang Cart
     return redirect("cart")
 

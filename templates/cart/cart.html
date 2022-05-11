@@ -40,9 +40,13 @@
                                     <div class="col">
                                         <div class="input-group input-spinner">
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-light" type="button" id="button-plus">
+                                                <!-- <button class="btn btn-light" type="button" id="button-plus">
                                                     <i class="fa fa-minus"></i>
-                                                </button>
+                                                </button> -->
+                                                <a href="{% url 'remove_from_cart' ci.product.id %}"
+                                                    class="btn btn-light" type="button" id="button-plus">
+                                                    <i class="fa fa-minus"></i>
+                                                </a>
                                             </div>
 
                                             <input type="text" class="form-control" value="{{ ci.quantity }}">
