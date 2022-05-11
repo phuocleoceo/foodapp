@@ -43,8 +43,8 @@
                                                 <!-- <button class="btn btn-light" type="button" id="button-plus">
                                                     <i class="fa fa-minus"></i>
                                                 </button> -->
-                                                <a href="{% url 'remove_from_cart' ci.product.id %}"
-                                                    class="btn btn-light" type="button" id="button-plus">
+                                                <a href="{% url 'minus_cart' ci.product.id %}" class="btn btn-light"
+                                                    type="button" id="button-plus">
                                                     <i class="fa fa-minus"></i>
                                                 </a>
                                             </div>
@@ -55,7 +55,7 @@
                                                 <!-- <button class="btn btn-light" type="button" id="button-minus">
                                                     <i class="fa fa-plus"></i>
                                                 </button> -->
-                                                <a href="{% url 'add_to_cart' ci.product.id %}" class="btn btn-light"
+                                                <a href="{% url 'plus_cart' ci.product.id %}" class="btn btn-light"
                                                     type="button" id="button-minus">
                                                     <i class="fa fa-plus"></i>
                                                 </a>
@@ -71,7 +71,9 @@
                                 </td>
 
                                 <td class="text-right">
-                                    <a href="" class="btn btn-danger"> <i class="fas fa-trash"></i></a>
+                                    <a href="{% url 'remove_cart' ci.product.id %}" class="btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
                             {% endfor %}

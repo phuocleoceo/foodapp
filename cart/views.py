@@ -43,9 +43,26 @@ def add_to_cart(request, product_id):
     return redirect("cart")
 
 
-def remove_from_cart(request, product_id):
+def plus_cart(request, product_id):
     """
-    Hàm xóa 1 sản phẩm khỏi giỏ hàng
+    Hàm tăng số lượng 1 sản phẩm trong giỏ hàng
+    """
+    # Lấy ra cart với id lấy từ Session
+    cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+    # Lấy ra sản phẩm từ id
+    product = get_object_or_404(Product, id=product_id)
+    # Lấy ra cart_item
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    # Tăng số lượng
+    cart_item.quantity += 1
+    cart_item.save()
+    # Redirect đến trang Cart
+    return redirect("cart")
+
+
+def minus_cart(request, product_id):
+    """
+    Hàm giảm số lượng 1 sản phẩm trong giỏ hàng
     """
     # Lấy ra cart với id lấy từ Session
     cart = Cart.objects.get(cart_id=cart_id_from_session(request))
@@ -60,6 +77,21 @@ def remove_from_cart(request, product_id):
     else:
         # Nếu không thì xóa luôn
         cart_item.delete()
+    # Redirect đến trang Cart
+    return redirect("cart")
+
+
+def remove_cart(request, product_id):
+    """
+    Hàm xóa 1 sản phẩm khỏi giỏ hàng
+    """
+    # Lấy ra cart với id lấy từ Session
+    cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+    # Lấy ra sản phẩm từ id
+    product = get_object_or_404(Product, id=product_id)
+    # Lấy ra cart_item
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    cart_item.delete()
     # Redirect đến trang Cart
     return redirect("cart")
 
