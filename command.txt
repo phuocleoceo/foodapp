@@ -7,7 +7,7 @@ python3 manage.py collectstatic
 ### Migrate a table
 python3 manage.py startapp category
 
-ecommerce/settings.py -> INSTALLED_APPS -> category
+foodapp/settings.py -> INSTALLED_APPS -> category
 
 python3 manage.py makemigrations category
 
