@@ -9,12 +9,13 @@ class Product(models.Model):
     name = models.CharField(max_length=100, unique=True)
     # allow_unicode để hỗ trợ UTF8
     slug = models.SlugField(max_length=50, unique=True, allow_unicode=True)
+    # Giá
     price = models.IntegerField()
+    # Mô tả
     description = models.TextField(max_length=500, blank=True)
+    # Hình ảnh
     image = models.ImageField(upload_to='photos/products')
-    # Số lượng hàng tồn kho
-    stock = models.IntegerField()
-    # Sản phẩm còn khả dụng (trong kho) hay không ?
+    # Sản phẩm còn khả dụng (còn để bán) hay không ?
     is_available = models.BooleanField(default=True)
     # auto_now_add : Khi tạo mới thì trường này tự động lấy ngày giờ hiện tại
     created_date = models.DateTimeField(auto_now_add=True)
