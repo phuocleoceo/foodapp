@@ -1,0 +1,8 @@
+{% extends 'dashboard-base.html' %}
+{% block content %}
+<form class="form" method="POST"> {% csrf_token %}
+    <h3>Bạn có chắc muốn xóa "{{ category.name }}" không ?</h3>
+    <input type="submit" class="btn btn-danger" value="Có">
+    <a href="/dashboard/category" class="btn btn-primary">Không</a>
+</form>
+{% endblock %}

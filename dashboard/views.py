@@ -1,3 +1,4 @@
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import CategoryForm, ProductForm
 from category.models import Category
 from django.shortcuts import render
@@ -20,15 +21,25 @@ def CreateCategory(request):
     if form.is_valid():
         form.save()
         form = CategoryForm()
-    return render(request, "dashboard/category/create.html", context={"form": form})
+    return render(request, "dashboard/category/create-update.html", context={"form": form})
 
 
 def UpdateCategory(request, id):
-    pass
+    category = get_object_or_404(Category, id=id)
+    form = CategoryForm(request.POST or None, instance=category)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect("/dashboard/category")
+    return render(request, "dashboard/category/create-update.html", context={"form": form})
 
 
 def DeleteCategory(request, id):
-    pass
+    category = get_object_or_404(Category, id=id)
+    if request.method == "POST":
+        category.delete()
+        return redirect("/dashboard/category")
+    return render(request, "dashboard/category/delete.html", context={"category": category})
 
 ####################################################################################
 
