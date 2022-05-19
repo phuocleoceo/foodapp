@@ -41,7 +41,7 @@ def DeleteCategory(request, id):
         return redirect("/dashboard/category")
     return render(request, "dashboard/category/delete.html", context={"category": category})
 
-####################################################################################
+#############################################################################################
 
 
 def ReadProduct(request):
@@ -52,12 +52,26 @@ def ReadProduct(request):
 
 
 def CreateProduct(request):
-    pass
+    form = ProductForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = ProductForm()
+    return render(request, "dashboard/product/create-update.html", context={"form": form})
 
 
 def UpdateProduct(request, id):
-    pass
+    product = get_object_or_404(Product, id=id)
+    form = ProductForm(request.POST or None, instance=product)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect("/dashboard/product")
+    return render(request, "dashboard/product/create-update.html", context={"form": form})
 
 
 def DeleteProduct(request, id):
-    pass
+    product = get_object_or_404(Product, id=id)
+    if request.method == "POST":
+        product.delete()
+        return redirect("/dashboard/product")
+    return render(request, "dashboard/product/delete.html", context={"product": product})
