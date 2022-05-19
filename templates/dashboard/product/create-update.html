@@ -1,6 +1,6 @@
 {% extends 'dashboard-base.html' %}
 {% block content %}
-<form class="form" method="POST">
+<form class="form" method="POST" enctype="multipart/form-data" style="margin: auto;width:50%">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" class="btn btn-primary" value="Xác nhận">
