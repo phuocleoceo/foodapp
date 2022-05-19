@@ -1,0 +1,48 @@
+{% extends 'dashboard-base.html' %}
+{% block content %}
+
+<table class="table">
+    <thead>
+        <th>Tên</th>
+        <th>Hình ảnh</th>
+        <th>Giá</th>
+        <th>Mô tả</th>
+        <th>Còn kinh doanh</th>
+        <th>Thuộc danh mục</th>
+        <th>
+            <a href="" class="btn btn-success">
+                <i class="fas fa-plus"></i>
+            </a>
+        </th>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>
+                <img src="{{ product.image.url }}" style="border-radius: 8px;height: 50px;width: auto;">
+            </td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+                {% if product.is_available %}
+                <i class="fas fa-check"></i>
+                {% else %}
+                <span></span>
+                {% endif %}
+            </td>
+            <td>{{ product.category.name }}</td>
+            <td>
+                <a href="" class="btn btn-primary">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock%}

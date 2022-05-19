@@ -1,0 +1,32 @@
+{% extends 'dashboard-base.html' %}
+{% block content %}
+
+<table class="table">
+    <thead>
+        <th>Tên</th>
+        <th>Mô tả</th>
+        <th>
+            <a href="" class="btn btn-success">
+                <i class="fas fa-plus"></i>
+            </a>
+        </th>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.name }}</td>
+            <td>{{ category.description }}</td>
+            <td>
+                <a href="" class="btn btn-primary">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock%}
