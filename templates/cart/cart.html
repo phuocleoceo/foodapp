@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
 <section class="section-content padding-y bg" style="min-height: 520px;">
     <div class="container">
 
+        {% if not cart_items %}
+        <h1 class="text-center text-danger">Giỏ hàng của bạn trống !</h1>
+        {% else %}
         <div class="row">
 
             <aside class="col-lg-9">
@@ -85,22 +89,18 @@
             <aside class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
-                        <dl class="dlist-align">
-                            <dt>Tiền sản phẩm :</dt>
-                            <dd class="text-right">{{ total }}</dd>
-                        </dl>
-                        <dl class="dlist-align">
-                            <dt>Thuế (10% VAT) :</dt>
-                            <dd class="text-right">{{ tax }}</dd>
-                        </dl>
-                        <dl class="dlist-align">
-                            <dt>Tổng phải trả :</dt>
-                            <dd class="text-right text-dark b"><strong>{{ grand_total }}</strong></dd>
-                        </dl>
+                        <div class="dlist-align">
+                            <span>Tổng phải trả : </span>
+                            &nbsp;
+                            <span class="text-right text-dark b">
+                                {{ total }} VNĐ
+                            </span>
+                        </div>
                         <hr>
-                        <!-- <p class="text-center mb-3">
-                            <img src="./images/misc/payments.png" height="26">
-                        </p> -->
+                        <p class="text-center mb-3">
+                            <img src="{% static 'images/icons/pay.jpg' %}" height="37">
+                        </p>
+
                         <a href="./place-order" class="btn btn-primary btn-block">
                             <i class="far fa-credit-card"></i> Thanh toán
                         </a>
@@ -108,6 +108,7 @@
                 </div>
             </aside>
         </div>
+        {% endif %}
     </div>
 </section>
 
