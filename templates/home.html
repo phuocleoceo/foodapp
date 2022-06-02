@@ -10,33 +10,4 @@
     </div>
 </section>
 
-<section class="section-name padding-y-sm">
-    <div class="container">
-
-        <header class="section-heading">
-            <a href="./product" class="btn btn-outline-primary float-right">Xem tất cả</a>
-            <h3 class="section-title">Sản phẩm thịnh hành</h3>
-        </header>
-
-
-        <div class="row">
-            {% for p in products %}
-            <div class="col-md-3">
-                <div class="card card-product-grid">
-                    <a href="{{ p.get_detail }}" class="img-wrap">
-                        <img src="{{ p.image.url }}">
-                    </a>
-
-                    <figcaption class="info-wrap">
-                        <a href="{{ p.get_detail }}" class="title">{{ p.name }}</a>
-                        <div class="price mt-1">{{ p.price }} VNĐ</div>
-                    </figcaption>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
-    </div>
-</section>
-
 {% endblock content %}
