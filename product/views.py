@@ -32,7 +32,7 @@ def detail(request, product_slug):
 
 def search(request):
     if "product_search" in request.GET:
-        product_search = request.GET["product_search"]
+        product_search = request.GET["product_search"] or " "
         if product_search:
             products = Product.objects.all().filter(name__icontains=product_search)
             # Đếm số lượng sản phẩm thu được
