@@ -25,7 +25,7 @@
                                     </li>
                                     <hr style="margin: 7px;" />
                                     {% for c in categories %}
-                                    <li><a href="{{ c.slug }}">{{ c.name }}</a></li>
+                                    <li><a href="{{ c.get_product }}">{{ c.name }}</a></li>
                                     {% endfor %}
                                 </ul>
 

@@ -27,13 +27,11 @@
                     </div>
                 </div>
 
-                <!-- <a href="/product" class="btn btn-outline-primary">Xem</a> -->
-
                 <div class="col-lg  col-md-6 col-sm-12 col">
-                    <form action="#" class="search">
+                    <form action="{% url 'product_search' %}" method="get" class="search">
                         <div class="input-group w-100">
                             <input type="text" class="form-control" style="width:60%;"
-                                placeholder="Tìm kiếm sản phẩm...">
+                                placeholder="Tìm kiếm sản phẩm..." name="product_search">
 
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">

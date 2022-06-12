@@ -28,3 +28,16 @@ def detail(request, product_slug):
         raise e
     return render(request=request, template_name="product/detail.html",
                   context={"product": product})
+
+
+def search(request):
+    if "product_search" in request.GET:
+        product_search = request.GET["product_search"]
+        if product_search:
+            products = Product.objects.all().filter(name__icontains=product_search)
+            # Đếm số lượng sản phẩm thu được
+            quantity = products.count()
+    # Các danh mục sản phẩm để hiển thị
+    categories = Category.objects.all()
+    return render(request=request, template_name="product/product.html",
+                  context={"products": products, "quantity": quantity, "categories": categories})
