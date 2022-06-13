@@ -98,7 +98,6 @@ def remove_cart(request, product_id):
 
 def cart(request):
     total = 0
-    quantity = 0
     cart_items = None
     try:
         # Dùng cart_id trong Session để lấy ra Cart
@@ -108,9 +107,8 @@ def cart(request):
         # Duyệt qua từng cart_item
         for ci in cart_items:
             # Tổng tiền = Đơn giá * số lượng
-            total += ci.product.price * ci.quantity
-            quantity += ci.quantity
+            total += ci.cart_total()
     except ObjectDoesNotExist:
         pass
     return render(request=request, template_name="cart/cart.html",
-                  context={"total": total, "quantity": quantity, "cart_items": cart_items})
+                  context={"total": total, "cart_items": cart_items})
