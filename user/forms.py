@@ -1,4 +1,3 @@
-import email
 from .models import User
 from django import forms
 
@@ -6,6 +5,13 @@ from django import forms
 class RegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = super(RegisterForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+        if password != confirm_password:
+            raise forms.ValidationError("Mật khẩu xác nhận không trùng khớp")
 
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={
