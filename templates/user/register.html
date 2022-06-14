@@ -10,69 +10,38 @@
             </header>
             <form action="{% url 'register' %}" method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
                 <div class="form-row">
                     <div class="col form-group">
                         <label>Họ và tên đệm</label>
-                        <input type="text" class="form-control" placeholder="">
+                        {{ form.first_name }}
                     </div>
 
                     <div class="col form-group">
                         <label>Tên</label>
-                        <input type="text" class="form-control" placeholder="">
+                        {{ form.last_name }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" placeholder="">
+                    {{ form.email }}
                     <small class="form-text text-muted">Email của bạn sẽ được bảo vệ</small>
                 </div>
 
                 <div class="form-group">
                     <label>Số điện thoại</label>
-                    <input type="text" class="form-control" placeholder="">
+                    {{ form.phone_number }}
                 </div>
-
-                <!-- <div class="form-group">
-                    <label class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" checked="" type="radio" name="gender" value="option1">
-                        <span class="custom-control-label"> Nam </span>
-                    </label>
-                    <label class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" name="gender" value="option2">
-                        <span class="custom-control-label"> Nữ </span>
-                    </label>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Thành phố</label>
-                        <input type="text" class="form-control">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label>Quốc gia</label>
-                        <select id="inputState" class="form-control">
-                            <option> Choose...</option>
-                            <option>United States</option>
-                            <option>Russia</option>
-                            <option selected="">Việt Nam</option>
-                            <option>India</option>
-                            <option>Afganistan</option>
-                        </select>
-                    </div>
-                </div> -->
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Mật khẩu</label>
-                        <input class="form-control" type="password">
+                        {{ form.password }}
                     </div>
 
                     <div class="form-group col-md-6">
                         <label>Xác nhận mật khẩu</label>
-                        <input class="form-control" type="password">
+                        {{ form.confirm_password }}
                     </div>
                 </div>
 
