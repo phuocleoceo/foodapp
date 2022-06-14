@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .forms import RegisterForm
 from django.contrib import auth
@@ -43,6 +44,7 @@ def register(request):
                   context={"form": form})
 
 
+@login_required(login_url="login")
 def logout(request):
     auth.logout(request)
     return redirect("/")

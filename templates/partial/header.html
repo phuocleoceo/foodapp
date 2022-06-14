@@ -56,7 +56,9 @@
                         <div class="widget-header">
                             <small class="title text-muted">Chào mừng {{ user.last_name }}</small>
                             <div>
+                                {% if user.is_superuser %}
                                 <a href="/dashboard">Quản lý</a> <span class="dark-transp"> | </span>
+                                {% endif %}
                                 <a href="/user/logout">Đăng xuất</span>
                             </div>
                         </div>
