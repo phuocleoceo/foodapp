@@ -1,10 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .forms import RegisterForm
+from django.contrib import auth
 from .models import User
 
 
 # Create your views here.
 def login(request):
+    if request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
+        print(email, password)
+        user = auth.authenticate(email=email, password=password)
+        print(user)
+        if user is not None:
+            auth.login(request, user)
+            return redirect("/")
+        else:
+            return redirect("login")
     return render(request=request, template_name="user/login.html")
 
 
