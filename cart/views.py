@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from cart.models import Cart, CartItem
 from product.models import Product
@@ -114,5 +115,20 @@ def cart(request):
                   context={"total": total, "cart_items": cart_items})
 
 
+@login_required(login_url="login")
 def checkout(request):
-    return render(request=request, template_name="cart/checkout.html")
+    total = 0
+    cart_items = None
+    try:
+        # Dùng cart_id trong Session để lấy ra Cart
+        cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+        # Lấy ra các Card_Item chưa thanh tóan từ cart
+        cart_items = CartItem.objects.filter(cart=cart, is_active=True)
+        # Duyệt qua từng cart_item
+        for ci in cart_items:
+            # Tổng tiền = Đơn giá * số lượng
+            total += ci.cart_total()
+    except ObjectDoesNotExist:
+        pass
+    return render(request=request, template_name="cart/checkout.html",
+                  context={"total": total, "cart_items": cart_items})
