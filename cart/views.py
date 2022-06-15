@@ -112,3 +112,7 @@ def cart(request):
         pass
     return render(request=request, template_name="cart/cart.html",
                   context={"total": total, "cart_items": cart_items})
+
+
+def checkout(request):
+    return render(request=request, template_name="cart/checkout.html")
