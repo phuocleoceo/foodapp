@@ -1,27 +1,31 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from django.contrib import auth
 from .models import User
 
 
 # Create your views here.
 def login(request):
+    # Login form submit
     if request.method == "POST":
-        email = request.POST["email"]
-        password = request.POST["password"]
-        print(email, password)
-        user = auth.authenticate(email=email, password=password)
-        print(user)
-        if user is not None:
-            auth.login(request, user)
-            return redirect("/")
-        else:
-            return redirect("login")
-    return render(request=request, template_name="user/login.html")
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            user = auth.authenticate(email=email, password=password)
+            if user is not None:
+                auth.login(request, user)
+                return redirect("/")
+        return redirect("login")
+    # Login page
+    form = LoginForm()
+    return render(request=request, template_name="user/login.html",
+                  context={"form": form})
 
 
 def register(request):
+    # Register form submit
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -38,7 +42,7 @@ def register(request):
             user.phone_number = phone_number
             user.save()
             return render(request=request, template_name="user/login.html")
-
+    # Register page
     form = RegisterForm()
     return render(request=request, template_name="user/register.html",
                   context={"form": form})

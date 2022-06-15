@@ -58,3 +58,22 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["first_name", "last_name", "email", "phone_number", "password"]
+
+
+class LoginForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Nhập email...'
+        })
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Mật khẩu...'
+        })
+    )
