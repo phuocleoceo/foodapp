@@ -5,7 +5,7 @@ from django.shortcuts import render
 from product.models import Product
 
 
-def HomePage(request):
+def DashboardPage(request):
     return render(request=request, template_name="dashboard/home.html")
 
 
