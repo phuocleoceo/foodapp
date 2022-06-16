@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from cart.views import cart_id_from_session
 from .forms import RegisterForm, LoginForm
+from cart.models import Cart, CartItem
 from django.contrib import auth
 from .models import User
 
@@ -15,6 +17,17 @@ def login(request):
             password = form.cleaned_data["password"]
             user = auth.authenticate(email=email, password=password)
             if user is not None:
+                try:
+                    cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+                    cart_items_exists = CartItem.objects.filter(cart=cart).exists()
+                    if cart_items_exists:
+                        cart_items = CartItem.objects.filter(cart=cart)
+                        for ci in cart_items:
+                            ci.user = user
+                            ci.save()
+                except:
+                    pass
+
                 auth.login(request, user)
                 return redirect("/")
         return redirect("login")

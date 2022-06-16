@@ -101,10 +101,14 @@ def cart(request):
     total = 0
     cart_items = None
     try:
-        # Dùng cart_id trong Session để lấy ra Cart
-        cart = Cart.objects.get(cart_id=cart_id_from_session(request))
         # Lấy ra các Card_Item chưa thanh tóan từ cart
-        cart_items = CartItem.objects.filter(cart=cart, is_active=True)
+        if request.user.is_authenticated:
+            # Theo user
+            cart_items = CartItem.objects.filter(user=request.user, is_active=True)
+        else:
+            # Dùng cart_id trong Session để lấy ra Cart
+            cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+            cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         # Duyệt qua từng cart_item
         for ci in cart_items:
             # Tổng tiền = Đơn giá * số lượng
@@ -120,10 +124,14 @@ def checkout(request):
     total = 0
     cart_items = None
     try:
-        # Dùng cart_id trong Session để lấy ra Cart
-        cart = Cart.objects.get(cart_id=cart_id_from_session(request))
         # Lấy ra các Card_Item chưa thanh tóan từ cart
-        cart_items = CartItem.objects.filter(cart=cart, is_active=True)
+        if request.user.is_authenticated:
+            # Theo user
+            cart_items = CartItem.objects.filter(user=request.user, is_active=True)
+        else:
+            # Dùng cart_id trong Session để lấy ra Cart
+            cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+            cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         # Duyệt qua từng cart_item
         for ci in cart_items:
             # Tổng tiền = Đơn giá * số lượng

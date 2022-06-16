@@ -14,7 +14,12 @@ def cart_count(request):
             # Lấy cart hiện tại lưu trong session
             cart = Cart.objects.filter(cart_id=cart_id_from_session(request))
             # Lấy danh sách các cart_item của nó
-            cart_items = CartItem.objects.all().filter(cart=cart[:1])
+            if request.user.is_authenticated:
+                # Theo user
+                cart_items = CartItem.objects.all().filter(user=request.user)
+            else:
+                # Chỉ theo cart của session
+                cart_items = CartItem.objects.all().filter(cart=cart[:1])
             # Đếm số lượng
             cart_count_badge = cart_items.count()
         except Cart.DoesNotExist:
