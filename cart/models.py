@@ -1,4 +1,5 @@
 from product.models import Product
+from user.models import User
 from django.db import models
 
 
@@ -22,6 +23,9 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
+    # Null = True vì khi lưu trữ bằng Session thì CartItem này không
+    # thuộc về User nào hết
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def cart_total(self):
         """

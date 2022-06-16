@@ -29,31 +29,13 @@
                                 </div>
                                 <div class="col form-group">
                                     <label for="">SĐT</label>
-                                    <input type="text" name="phone" class="form-control" required>
+                                    <input type="text" name="phone_number" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col form-group">
-                                    <label for="">Address Line 1</label>
-                                    <input type="text" name="address_line_1" class="form-control" required>
-                                </div>
-                                <div class="col form-group">
-                                    <label for="">Address Line 2</label>
-                                    <input type="text" name="address_line_2" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label for="">City</label>
-                                    <input type="text" name="city" class="form-control" required>
-                                </div>
-                                <div class="col form-group">
-                                    <label for="">State</label>
-                                    <input type="text" name="state" class="form-control" required>
-                                </div>
-                                <div class="col form-group">
-                                    <label for="">Country</label>
-                                    <input type="text" name="country" class="form-control" required>
+                                    <label for="">Địa chỉ nhận hàng</label>
+                                    <input type="text" name="address" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -82,11 +64,13 @@
                                 <tr>
                                     <td>
                                         <figure class="itemside align-items-center">
-                                            <div class="aside"><img src="{{ ci.product.image.url }}" class="img-sm">
+                                            <div class="aside">
+                                                <img src="{{ ci.product.image.url }}" class="img-sm">
                                             </div>
                                             <figcaption class="info">
                                                 <a href="{{ ci.product.get_detail }}" class="title text-dark">
-                                                    {{ ci.product.name }}</a>
+                                                    {{ ci.product.name }}
+                                                </a>
                                             </figcaption>
                                         </figure>
                                     </td>
@@ -116,7 +100,6 @@
                         <button type="submit" name="submit" class="btn btn-primary btn-block">
                             <i class="far fa-credit-card"></i> Xác nhận đặt món
                         </button>
-                        <a href="{% url 'product' %}" class="btn btn-light btn-block">Tiếp tục đặt món</a>
                         </form>
                     </div>
                 </div>
