@@ -48,7 +48,7 @@ def add_to_cart(request, product_id):
     return redirect("cart")
 
 
-def plus_cart(request, product_id):
+def plus_cart(request, product_id, cart_item_id):
     """
     Hàm tăng số lượng 1 sản phẩm trong giỏ hàng
     """
@@ -56,7 +56,7 @@ def plus_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     if request.user.is_authenticated:
         # Theo user
-        cart_item = CartItem.objects.get(user=request.user, product=product, is_active=True)
+        cart_item = CartItem.objects.get(user=request.user, product=product, id=cart_item_id)
     else:
         # Lấy ra cart với id lấy từ Session
         cart = Cart.objects.get(cart_id=cart_id_from_session(request))
@@ -70,7 +70,7 @@ def plus_cart(request, product_id):
     return redirect("cart")
 
 
-def minus_cart(request, product_id):
+def minus_cart(request, product_id, cart_item_id):
     """
     Hàm giảm số lượng 1 sản phẩm trong giỏ hàng
     """
@@ -79,7 +79,7 @@ def minus_cart(request, product_id):
 
     if request.user.is_authenticated:
         # Theo user
-        cart_item = CartItem.objects.get(user=request.user, product=product, is_active=True)
+        cart_item = CartItem.objects.get(user=request.user, product=product, id=cart_item_id)
     else:
         # Lấy ra cart với id lấy từ Session
         cart = Cart.objects.get(cart_id=cart_id_from_session(request))
@@ -97,7 +97,7 @@ def minus_cart(request, product_id):
     return redirect("cart")
 
 
-def remove_cart(request, product_id):
+def remove_cart(request, product_id, cart_item_id):
     """
     Hàm xóa 1 sản phẩm khỏi giỏ hàng
     """
@@ -105,7 +105,7 @@ def remove_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     if request.user.is_authenticated:
         # Theo user
-        cart_item = CartItem.objects.get(user=request.user, product=product, is_active=True)
+        cart_item = CartItem.objects.get(user=request.user, product=product, id=cart_item_id)
     else:
         # Lấy ra cart với id lấy từ Session
         cart = Cart.objects.get(cart_id=cart_id_from_session(request))
