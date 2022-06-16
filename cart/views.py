@@ -37,6 +37,10 @@ def add_to_cart(request, product_id):
     except:
         # Nếu chưa có thì tạo mới với số lượng là 1
         cart_item = CartItem.objects.create(product=product, cart=cart, quantity=1)
+
+    # Nếu đang có User đăng nhập thì gán User này cho CartItem luôn
+    if request.user.is_authenticated:
+        cart_item.user = request.user
     # Lưu cart_item
     cart_item.save()
 
@@ -48,12 +52,17 @@ def plus_cart(request, product_id):
     """
     Hàm tăng số lượng 1 sản phẩm trong giỏ hàng
     """
-    # Lấy ra cart với id lấy từ Session
-    cart = Cart.objects.get(cart_id=cart_id_from_session(request))
     # Lấy ra sản phẩm từ id
     product = get_object_or_404(Product, id=product_id)
-    # Lấy ra cart_item
-    cart_item = CartItem.objects.get(product=product, cart=cart)
+    if request.user.is_authenticated:
+        # Theo user
+        cart_item = CartItem.objects.get(user=request.user, product=product, is_active=True)
+    else:
+        # Lấy ra cart với id lấy từ Session
+        cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+        # Lấy ra cart_item
+        cart_item = CartItem.objects.get(product=product, cart=cart)
+
     # Tăng số lượng
     cart_item.quantity += 1
     cart_item.save()
@@ -65,12 +74,18 @@ def minus_cart(request, product_id):
     """
     Hàm giảm số lượng 1 sản phẩm trong giỏ hàng
     """
-    # Lấy ra cart với id lấy từ Session
-    cart = Cart.objects.get(cart_id=cart_id_from_session(request))
     # Lấy ra sản phẩm từ id
     product = get_object_or_404(Product, id=product_id)
-    # Lấy ra cart_item
-    cart_item = CartItem.objects.get(product=product, cart=cart)
+
+    if request.user.is_authenticated:
+        # Theo user
+        cart_item = CartItem.objects.get(user=request.user, product=product, is_active=True)
+    else:
+        # Lấy ra cart với id lấy từ Session
+        cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+        # Lấy ra cart_item
+        cart_item = CartItem.objects.get(product=product, cart=cart)
+
     if cart_item.quantity > 1:
         # Nếu số lượng >1 thì giảm 1
         cart_item.quantity -= 1
@@ -86,12 +101,18 @@ def remove_cart(request, product_id):
     """
     Hàm xóa 1 sản phẩm khỏi giỏ hàng
     """
-    # Lấy ra cart với id lấy từ Session
-    cart = Cart.objects.get(cart_id=cart_id_from_session(request))
     # Lấy ra sản phẩm từ id
     product = get_object_or_404(Product, id=product_id)
-    # Lấy ra cart_item
-    cart_item = CartItem.objects.get(product=product, cart=cart)
+    if request.user.is_authenticated:
+        # Theo user
+        cart_item = CartItem.objects.get(user=request.user, product=product, is_active=True)
+    else:
+        # Lấy ra cart với id lấy từ Session
+        cart = Cart.objects.get(cart_id=cart_id_from_session(request))
+        # Lấy ra cart_item
+        cart_item = CartItem.objects.get(product=product, cart=cart)
+
+    # Xóa luôn
     cart_item.delete()
     # Redirect đến trang Cart
     return redirect("cart")

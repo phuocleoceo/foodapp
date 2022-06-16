@@ -18,11 +18,14 @@ def login(request):
             user = auth.authenticate(email=email, password=password)
             if user is not None:
                 try:
+                    # Tự động lấy thông tin giỏ hàng từ Session
+                    # để tạo giỏ hàng cho User vừa đăng nhập
                     cart = Cart.objects.get(cart_id=cart_id_from_session(request))
                     cart_items_exists = CartItem.objects.filter(cart=cart).exists()
                     if cart_items_exists:
                         cart_items = CartItem.objects.filter(cart=cart)
                         for ci in cart_items:
+                            # Gán User của cart_items thành user vừa đăng nhập
                             ci.user = user
                             ci.save()
                 except:
