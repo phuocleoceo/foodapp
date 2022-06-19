@@ -1,11 +1,18 @@
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 from order.models import Order, OrderDetail
-from django.shortcuts import redirect
 from cart.models import CartItem
 from .forms import OrderForm
 
 
 # Create your views here.
+@login_required(login_url="login")
+def order_history(request):
+    orders = Order.objects.order_by('-created_at').filter(user=request.user)
+    return render(request=request, template_name="order/history.html",
+                  context={"user": request.user, "orders": orders})
+
+
 @login_required(login_url="login")
 def place_order(request):
     cart_items = CartItem.objects.filter(user=request.user)
@@ -46,5 +53,5 @@ def place_order(request):
             # Xóa Cart vừa mua
             CartItem.objects.filter(user=request.user).delete()
 
-            return redirect("checkout")
+            return redirect("order_history")
     return redirect("checkout")

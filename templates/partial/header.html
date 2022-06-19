@@ -58,6 +58,8 @@
                             <div>
                                 {% if user.is_superuser %}
                                 <a href="/dashboard">Quản lý</a> <span class="dark-transp"> | </span>
+                                {% else %}
+                                <a href="/order/history">Đơn hàng</a> <span class="dark-transp"> | </span>
                                 {% endif %}
                                 <a href="/user/logout">Đăng xuất</span>
                             </div>
