@@ -4,7 +4,7 @@ from django import forms
 
 class OrderForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(Order, self).__init__(*args, **kwargs)
+        super(OrderForm, self).__init__(*args, **kwargs)
 
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={
@@ -42,9 +42,10 @@ class OrderForm(forms.ModelForm):
     )
 
     order_note = forms.CharField(
-        widget=forms.TextInput(attrs={
+        widget=forms.Textarea(attrs={
             'class': 'form-control',
-            'placeholder': 'Ghi chú...'
+            'placeholder': 'Ghi chú...',
+            'rows': 2
         })
     )
 

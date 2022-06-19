@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from cart.models import Cart, CartItem
 from product.models import Product
+from order.forms import OrderForm
 
 
 # Create your views here.
@@ -160,4 +161,4 @@ def checkout(request):
     except ObjectDoesNotExist:
         pass
     return render(request=request, template_name="cart/checkout.html",
-                  context={"total": total, "cart_items": cart_items})
+                  context={"total": total, "cart_items": cart_items, "form": OrderForm()})

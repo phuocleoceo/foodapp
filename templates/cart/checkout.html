@@ -10,37 +10,37 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title mb-4">Thông tin giao hàng</h4>
-                        <form action="{% url 'checkout' %}" method="POST">
+                        <form action="{% url 'place_order' %}" method="POST">
                             {% csrf_token %}
                             <div class="form-row">
                                 <div class="col form-group">
                                     <label for="">Họ và tên đệm</label>
-                                    <input type="text" name="first_name" class="form-control" required>
+                                    {{ form.first_name }}
                                 </div>
                                 <div class="col form-group">
                                     <label for="">Tên</label>
-                                    <input type="text" name="last_name" class="form-control" required>
+                                    {{ form.last_name }}
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col form-group">
                                     <label for="">Email</label>
-                                    <input type="email" name="email" class="form-control" required>
+                                    {{ form.email }}
                                 </div>
                                 <div class="col form-group">
                                     <label for="">SĐT</label>
-                                    <input type="text" name="phone_number" class="form-control" required>
+                                    {{ form.phone_number }}
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col form-group">
                                     <label for="">Địa chỉ nhận hàng</label>
-                                    <input type="text" name="address" class="form-control" required>
+                                    {{ form.address }}
                                 </div>
                             </div>
                             <div class="form-row">
                                 <label for="">Ghi chú</label>
-                                <textarea name="order_note" rows="2" class="form-control"></textarea>
+                                {{ form.order_note }}
                             </div>
                     </div>
                 </div>
