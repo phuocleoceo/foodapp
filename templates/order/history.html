@@ -9,7 +9,13 @@
             <article class="card">
                 <header class="card-header" style="display: flex;justify-content: space-between;">
                     <strong style="font-size: 17px;">Ngày đặt : {{ order.created_at }}</strong>
-                    <a href="#" class="btn btn-outline-primary"> Đã nhận được hàng </a>
+                    {% if order.is_done %}
+                    <p class="text-success" style="font-size: 17px;">Đã nhận</p>
+                    {% else %}
+                    <a href="{% url 'set_order_done' order.id %}" class="btn btn-outline-primary">
+                        Đã nhận được hàng
+                    </a>
+                    {% endif %}
                 </header>
 
                 <div class="card-body">

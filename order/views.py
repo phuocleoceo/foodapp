@@ -20,6 +20,14 @@ def order_history(request):
 
 
 @login_required(login_url="login")
+def set_order_done(request, order_id):
+    order = Order.objects.get(id=order_id)
+    order.is_done = True
+    order.save()
+    return redirect("order_history")
+
+
+@login_required(login_url="login")
 def place_order(request):
     cart_items = CartItem.objects.filter(user=request.user)
     cart_count = cart_items.count()
