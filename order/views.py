@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from order.models import Order, OrderDetail
+from django.shortcuts import redirect
 from cart.models import CartItem
-from order.models import Order
 from .forms import OrderForm
 
 
@@ -21,7 +21,6 @@ def place_order(request):
 
     if request.method == "POST":
         form = OrderForm(request.POST)
-        print(form)
         if form.is_valid():
             new_order = Order()
             new_order.user = request.user
@@ -34,5 +33,18 @@ def place_order(request):
             new_order.order_total = total
             # Save
             new_order.save()
+
+            # Chuyển CartItem sang OrderDetail
+            for ci in cart_items:
+                new_order_detail = OrderDetail()
+                new_order_detail.order = new_order
+                new_order_detail.user = request.user
+                new_order_detail.product = ci.product
+                new_order_detail.quantity = ci.quantity
+                new_order_detail.product_price = ci.product.price
+                new_order_detail.save()
+            # Xóa Cart vừa mua
+            CartItem.objects.filter(user=request.user).delete()
+
             return redirect("checkout")
     return redirect("checkout")
