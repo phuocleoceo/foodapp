@@ -14,7 +14,7 @@ class Order(models.Model):
     phone_number = models.CharField(max_length=15)
     address = models.CharField(max_length=50)
     order_note = models.CharField(max_length=100, blank=True)
-    order_total = models.FloatField()
+    order_total = models.IntegerField()
     # Đơn hàng đã hoàn thành (đã giao) hay chưa
     is_done = models.BooleanField(default=False)
     # Timestamps
