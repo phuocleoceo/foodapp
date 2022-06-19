@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import CategoryForm, ProductForm
 from category.models import Category
 from django.shortcuts import render
 from product.models import Product
 
 
+@login_required(login_url="login")
 def DashboardPage(request):
     return render(request=request, template_name="dashboard/home.html")
 
