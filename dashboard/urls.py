@@ -13,4 +13,6 @@ urlpatterns = [
     path("product/create", views.CreateProduct, name="CreateProduct"),
     path("product/<int:id>/update", views.UpdateProduct, name="UpdateProduct"),
     path("product/<int:id>/delete", views.DeleteProduct, name="DeleteProduct"),
+
+    path("order", views.ReadOrder, name="ReadOrder"),
 ]

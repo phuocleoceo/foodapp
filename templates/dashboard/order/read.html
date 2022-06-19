@@ -1,0 +1,65 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+{% block content %}
+
+{% for order, order_detail in orders_vm %}
+<article class="card">
+    <header class="card-header" style="display: flex;justify-content: space-between;">
+        <strong style="font-size: 17px;">Ngày đặt : {{ order.created_at }}</strong>
+        {% if order.is_done %}
+        <p class="text-success" style="font-size: 18px;"><b>Đã nhận</b></p>
+        {% else %}
+        <p class="text-danger" style="font-size: 18px;"><b>Chưa nhận</b></p>
+        {% endif %}
+    </header>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <h6 class="text-muted">Thông tin đơn hàng : </h6>
+                <p>Người nhận : {{ order.first_name }} {{ order.last_name }} <br>
+                    SĐT : {{ order.phone_number }} <br>
+                    Email : {{ order.email }} <br>
+                    Địa chỉ: {{ order.address }} <br>
+                    Ghi chú : {{ order.order_note }}
+                </p>
+                <b>Tổng : {{ order.order_total }} VNĐ</b>
+            </div>
+
+            <div class="col-md-8">
+                <table class="table table-hover">
+                    <thead class="text-muted">
+                        <tr class="small text-uppercase">
+                            <th scope="col">Sản phẩm</th>
+                            <th scope="col" width="150">Đơn giá mua</th>
+                            <th scope="col" width="140">Số lượng</th>
+                            <th scope="col" width="170">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for od in order_detail %}
+                        <tr>
+                            <td>
+                                <p class="title mb-0">{{ od.product.name }}</p>
+                            </td>
+                            <td>
+                                <p class="title mb-0">{{ od.product_price }}</p>
+                            </td>
+                            <td>
+                                <p class="title mb-0">{{ od.quantity }}</p>
+                            </td>
+                            <td>
+                                <p class="title mb-0">{{ od.order_detail_total }}</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</article>
+<hr>
+{% endfor %}
+
+{% endblock%}

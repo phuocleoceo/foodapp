@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CategoryForm, ProductForm
+from order.models import Order, OrderDetail
 from category.models import Category
 from django.shortcuts import render
 from product.models import Product
@@ -78,3 +79,17 @@ def DeleteProduct(request, id):
         product.delete()
         return redirect("/dashboard/product")
     return render(request, "dashboard/product/delete.html", context={"product": product})
+
+
+##############################################################################################
+def ReadOrder(request):
+    orders = Order.objects.order_by('-created_at').all()
+    # Mảng tuple chứa Order đi kèm theo các OrderDetail tương ứng
+    orders_vm = []
+    for order in orders:
+        # Lấy order detail tương ứng
+        order_detail = OrderDetail.objects.filter(order=order)
+        orders_vm.append((order, order_detail))
+    print(len(orders_vm))
+    return render(request=request, template_name="dashboard/order/read.html",
+                  context={"orders_vm": orders_vm})

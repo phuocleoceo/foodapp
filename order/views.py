@@ -16,7 +16,7 @@ def order_history(request):
         order_detail = OrderDetail.objects.filter(user=request.user, order=order)
         orders_vm.append((order, order_detail))
     return render(request=request, template_name="order/history.html",
-                  context={"user": request.user, "orders_vm": orders_vm})
+                  context={"orders_vm": orders_vm})
 
 
 @login_required(login_url="login")
