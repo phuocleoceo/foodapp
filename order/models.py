@@ -32,3 +32,9 @@ class OrderDetail(models.Model):
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def order_detail_total(self):
+        """
+        Hàm trả về Thành tiền của order detail hiện tại
+        """
+        return self.product_price * self.quantity

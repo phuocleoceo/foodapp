@@ -9,8 +9,14 @@ from .forms import OrderForm
 @login_required(login_url="login")
 def order_history(request):
     orders = Order.objects.order_by('-created_at').filter(user=request.user)
+    # Mảng tuple chứa Order đi kèm theo các OrderDetail tương ứng
+    orders_vm = []
+    for order in orders:
+        # Lấy order detail tương ứng
+        order_detail = OrderDetail.objects.filter(user=request.user, order=order)
+        orders_vm.append((order, order_detail))
     return render(request=request, template_name="order/history.html",
-                  context={"user": request.user, "orders": orders})
+                  context={"user": request.user, "orders_vm": orders_vm})
 
 
 @login_required(login_url="login")

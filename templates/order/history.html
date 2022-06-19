@@ -5,11 +5,11 @@
 <section class="section-conten padding-y bg">
     <div class="container">
         <main class="col-md-12">
-            {% for order in orders %}
+            {% for order, order_detail in orders_vm %}
             <article class="card">
                 <header class="card-header" style="display: flex;justify-content: space-between;">
                     <strong style="font-size: 17px;">Ngày đặt : {{ order.created_at }}</strong>
-                    <a href="#" class="btn btn-outline-primary"> Đã nhận hàng </a>
+                    <a href="#" class="btn btn-outline-primary"> Đã nhận được hàng </a>
                 </header>
 
                 <div class="card-body">
@@ -24,52 +24,39 @@
                             </p>
                             <b>Tổng : {{ order.order_total }} VNĐ</b>
                         </div>
+
                         <div class="col-md-8">
-
-
+                            <table class="table table-hover">
+                                <thead class="text-muted">
+                                    <tr class="small text-uppercase">
+                                        <th scope="col">Sản phẩm</th>
+                                        <th scope="col" width="150">Đơn giá mua</th>
+                                        <th scope="col" width="140">Số lượng</th>
+                                        <th scope="col" width="170">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for od in order_detail %}
+                                    <tr>
+                                        <td>
+                                            <p class="title mb-0">{{ od.product.name }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="title mb-0">{{ od.product_price }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="title mb-0">{{ od.quantity }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="title mb-0">{{ od.order_detail_total }}</p>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="table-responsive">
-                    <table class="table table-hover">
-                        <tr>
-                            <td width="65">
-                                <img src="../images/items/1.jpg" class="img-xs border">
-                            </td>
-                            <td>
-                                <p class="title mb-0">Product name goes here </p>
-                                <var class="price text-muted">USD 145</var>
-                            </td>
-                            <td> Seller <br> Nike clothing </td>
-                            <td width="250"> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#"
-                                    class="btn btn-light"> Details </a> </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="../images/items/2.jpg" class="img-xs border">
-                            </td>
-                            <td>
-                                <p class="title mb-0">Another name goes here </p>
-                                <var class="price text-muted">USD 15</var>
-                            </td>
-                            <td> Seller <br> ABC shop </td>
-                            <td> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#"
-                                    class="btn btn-light"> Details </a> </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="../images/items/3.jpg" class="img-xs border">
-                            </td>
-                            <td>
-                                <p class="title mb-0">The name of the product goes here </p>
-                                <var class="price text-muted">USD 145</var>
-                            </td>
-                            <td> Seller <br> Wallmart </td>
-                            <td> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#"
-                                    class="btn btn-light"> Details </a> </td>
-                        </tr>
-                    </table>
-                </div> -->
             </article>
             <hr>
             {% endfor %}
