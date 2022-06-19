@@ -28,7 +28,7 @@ class OrderDetail(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     # Lưu lại giá sản phẩm tại thời điẻm mua, tránh sau này giá sp thay đổi
-    product_price = models.FloatField()
+    product_price = models.IntegerField()
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
