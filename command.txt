@@ -24,3 +24,7 @@ phuocleoceo / ht10082001@gmail.com / meloxicamfood
 
 ### Create admin account in docker
 docker exec -it <container-name> python manage.py createsuperuser
+
+### Run by docker
+docker pull phuocleoceo/foodapp-foodapp
+docker run -d -p 8000:8000 --name foodapp phuocleoceo/foodapp-foodapp
