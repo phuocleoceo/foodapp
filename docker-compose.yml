@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  foodapp:
+    container_name: foodapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - foodapp-network
+
+networks:
+  foodapp-network:
+    driver: bridge
