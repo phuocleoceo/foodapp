@@ -21,3 +21,6 @@ python3 manage.py migrate
 python3 manage.py createsuperuser
 
 phuocleoceo / ht10082001@gmail.com / meloxicamfood
+
+### Create admin account in docker
+docker exec -it <container-name> python manage.py createsuperuser
